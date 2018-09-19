@@ -9,3 +9,7 @@ coverage
 *.scss
 *.woff
 *.ttf
+build
+src
+packages
+examples

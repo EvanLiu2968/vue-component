@@ -1,3 +1,4 @@
 {
-  "alert": "./packages/alert/index.js"
+  "alert": "./packages/alert/index.js",
+  "qrcode": "./packages/qrcode/index.js"
 }

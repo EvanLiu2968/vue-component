@@ -30,6 +30,10 @@
             {
               "path": "/alert",
               "title": "Alert 警告"
+            },
+            {
+              "path": "/qrcode",
+              "title": "Qrcode 二维码"
             }
           ]
         }
@@ -67,6 +71,10 @@
             {
               "path": "/alert",
               "title": "Alert"
+            },
+            {
+              "path": "/qrcode",
+              "title": "Qrcode"
             }
           ]
         }

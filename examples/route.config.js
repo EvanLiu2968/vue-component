@@ -132,9 +132,9 @@ route.push({
 });
 
 let userLanguage = localStorage.getItem('ELEMENT_LANGUAGE') || window.navigator.language || 'en-US';
-let defaultPath = '/zh-CN';
+let defaultPath = '/zh-CN/component';
 if (userLanguage.indexOf('en-') !== -1) {
-  defaultPath = '/en-US';
+  defaultPath = '/en-US/component';
 }
 
 route = route.concat([{
