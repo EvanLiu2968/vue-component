@@ -11,9 +11,6 @@
 ### Components List
 - `Qrcode`
 - `Lazyload`
-- `Loading`
-- `Echarts`
-- `Markdown`
 
 ## Getting Started
 

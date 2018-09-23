@@ -186,8 +186,8 @@
   </el-scrollbar>
 </template>
 <script>
-  import bus from '../../bus';
-  import navsData from '../../nav.config.json';
+  import bus from '../bus';
+  import navsData from '../nav.config.json';
   import throttle from 'throttle-debounce/throttle';
 
   export default {

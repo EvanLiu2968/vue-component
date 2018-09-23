@@ -4,12 +4,12 @@ import navConfig from './nav.config.json';
 const LOAD_MAP = {
   'zh-CN': name => {
     return r => require.ensure([], () =>
-      r(require(`./pages/zh-CN/${name}.vue`)),
+      r(require(`./pages/${name}.vue`)),
     'zh-CN');
   },
   'en-US': name => {
     return r => require.ensure([], () =>
-      r(require(`./pages/en-US/${name}.vue`)),
+      r(require(`./pages/${name}.vue`)),
     'en-US');
   }
 };
@@ -41,7 +41,7 @@ const registerRoute = (navConfig) => {
     let navs = navConfig[lang];
     route.push({
       path: `/${ lang }/component`,
-      redirect: `/${ lang }/component/installation`,
+      redirect: `/${ lang }/component/quickstart`,
       component: load(lang, 'component'),
       children: []
     });

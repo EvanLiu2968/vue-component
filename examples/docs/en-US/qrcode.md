@@ -31,18 +31,18 @@
 ```html
 <template>
   <v-qrcode
-    text='https://www.evanliu2968.com.cn'></v-qrcode>
+    text='https://www.evanliu2968.com.cn'/>
   <v-qrcode
     text='https://github.com/EvanLiu2968/react-component/issues?utf8=%E2%9C%93&q=is%3Aopen'
     :width='300'
     :margin='3'
-    color='#20A0FF'></v-qrcode>
+    color='#20A0FF'/>
   <v-qrcode
     text='https://www.evanliu2968.com.cn'
     :width='200'
     color='#FF4949'
     bg-color='#FF494911'
-    :margin='2'></v-qrcode>
+    :margin='2'/>
 </template>
 ```
 :::
@@ -59,7 +59,7 @@
     logo='https://www.evanliu2968.com.cn/public/images/horse.png'
     error-correction-level='H'
     :mask-pattern='0'
-    :logo-width='40'></v-qrcode>
+    :logo-width='40'/>
 </template>
 ```
 :::

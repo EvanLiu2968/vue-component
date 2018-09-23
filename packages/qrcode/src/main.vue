@@ -1,5 +1,5 @@
 <template>
-  <canvas class={{ className }} ref="node" />
+  <canvas :class="className" ref="node" />
 </template>
 
 <script type="text/babel">
@@ -103,16 +103,16 @@
 
     methods: {
       work() {
-        generateQRCode(this.text, merge({}, this.props, {
+        generateQRCode(this._props.text, merge({}, this._props, {
           color: {
-            dark: this.color,
-            light: this.bgColor,
+            dark: this._props.color,
+            light: this._props.bgColor,
           }
         }), this.$refs.node).then((src)=>{
           // this.node.src = src;
-          if(this.props.logo){
+          if(this._props.logo){
             let img = new Image();
-            img.src = this.props.logo;
+            img.src = this._props.logo;
             if (img.complete) {
               this.loadedHandle(img)
               return;
@@ -124,7 +124,7 @@
         })
       },
       loadedHandle(img) {
-        const { width, logoWidth } = this.props;
+        const { width, logoWidth } = this._props;
         const cxt=this.$refs.node.getContext("2d");
         const halfWidth = (width-logoWidth)/2;
         cxt.drawImage(img,0,0,img.width,img.height,halfWidth,halfWidth,logoWidth,logoWidth);
@@ -132,8 +132,10 @@
     },
 
     mounted(){
-      console.log("mounted")
-      console.log(this.props)
+      this.work()
+    },
+    updated(){
+      this.work()
     }
   };
 </script>

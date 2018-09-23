@@ -268,13 +268,8 @@
         <ul class="nav">
           <!-- <li class="nav-item nav-algolia-search" v-show="isComponentPage">
             <algolia-search></algolia-search>
-          </li>
-          <li class="nav-item">
-            <router-link
-              active-class="active"
-              :to="`/${ lang }/guide`">{{ langConfig.guide }}
-            </router-link>
           </li> -->
+          
           <li class="nav-item">
             <router-link
               active-class="active"
@@ -283,6 +278,9 @@
           </li>
           <li class="nav-item">
             <a href="https://github.com/EvanLiu2968/vue-component" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </li>
+          <li class="nav-item">
+            <a href="https://evanliu2968.github.io/react-component/" target="_blank" rel="noopener noreferrer">React Component</a>
           </li>
 
           <!-- gap -->

@@ -1,5 +1,5 @@
 const path = require('path');
-const templates = path.resolve(process.cwd(), './examples/pages/template');
+const templates = path.resolve(process.cwd(), './examples/pages');
 
 const chokidar = require('chokidar');
 let watcher = chokidar.watch([templates]);
@@ -7,7 +7,7 @@ let watcher = chokidar.watch([templates]);
 watcher.on('ready', function() {
   watcher
     .on('change', function() {
-      exec('npm run i18n');
+      exec('echo "examples/pages/* changed!" ');
     });
 });
 

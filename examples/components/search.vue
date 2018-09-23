@@ -24,7 +24,7 @@
         href="https://www.algolia.com/docsearch">
         <img
           class="algolia-search-logo"
-          src="../assets/images/search-by-algolia.svg"
+          src="https://raw.githubusercontent.com/ElemeFE/element/master/examples/assets/images/search-by-algolia.svg"
           alt="algolia-logo">
       </a>
       <p

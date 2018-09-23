@@ -35,7 +35,7 @@ router.afterEach(route => {
       return;
     }
   }
-  document.title = 'Element';
+  document.title = 'Vue Component';
 });
 
 new Vue({ // eslint-disable-line

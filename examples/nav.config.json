@@ -4,20 +4,12 @@
       "name": "开发指南",
       "children": [
         {
-          "path": "/installation",
-          "name": "安装"
-        },
-        {
           "path": "/quickstart",
           "name": "快速上手"
         },
         {
           "path": "/i18n",
           "name": "国际化"
-        },
-        {
-          "path": "/transition",
-          "name": "内置过渡动画"
         }
       ]
     },
@@ -27,10 +19,6 @@
         {
           "groupName": "Basic",
           "list": [
-            {
-              "path": "/alert",
-              "title": "Alert 警告"
-            },
             {
               "path": "/qrcode",
               "title": "Qrcode 二维码"
@@ -45,20 +33,12 @@
       "name": "Development",
       "children": [
         {
-          "path": "/installation",
-          "name": "Installation"
-        },
-        {
           "path": "/quickstart",
           "name": "Quick Start"
         },
         {
           "path": "/i18n",
           "name": "Internationalization"
-        },
-        {
-          "path": "/transition",
-          "name": "Built-in transition"
         }
       ]
     },
@@ -68,10 +48,6 @@
         {
           "groupName": "Basic",
           "list": [
-            {
-              "path": "/alert",
-              "title": "Alert"
-            },
             {
               "path": "/qrcode",
               "title": "Qrcode"
