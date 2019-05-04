@@ -103,16 +103,16 @@
 
     methods: {
       work() {
-        generateQRCode(this._props.text, merge({}, this._props, {
+        generateQRCode(this.$props.text, merge({}, this.$props, {
           color: {
-            dark: this._props.color,
-            light: this._props.bgColor,
+            dark: this.$props.color,
+            light: this.$props.bgColor,
           }
         }), this.$refs.node).then((src)=>{
           // this.node.src = src;
-          if(this._props.logo){
+          if(this.$props.logo){
             let img = new Image();
-            img.src = this._props.logo;
+            img.src = this.$props.logo;
             if (img.complete) {
               this.loadedHandle(img)
               return;
@@ -124,7 +124,7 @@
         })
       },
       loadedHandle(img) {
-        const { width, logoWidth } = this._props;
+        const { width, logoWidth } = this.$props;
         const cxt=this.$refs.node.getContext("2d");
         const halfWidth = (width-logoWidth)/2;
         cxt.drawImage(img,0,0,img.width,img.height,halfWidth,halfWidth,logoWidth,logoWidth);

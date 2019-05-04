@@ -22,6 +22,10 @@
             {
               "path": "/qrcode",
               "title": "Qrcode 二维码"
+            },
+            {
+              "path": "/upload",
+              "title": "Upload 上传"
             }
           ]
         }
@@ -51,6 +55,10 @@
             {
               "path": "/qrcode",
               "title": "Qrcode"
+            },
+            {
+              "path": "/upload",
+              "title": "Upload"
             }
           ]
         }

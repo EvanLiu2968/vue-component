@@ -10,6 +10,7 @@
 
 ### Components List
 - `Qrcode`
+- `Upload`
 - `Lazyload`
 
 ## Getting Started

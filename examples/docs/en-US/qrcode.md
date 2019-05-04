@@ -56,7 +56,7 @@
 <template>
   <v-qrcode 
     text='https://www.evanliu2968.com.cn'
-    logo='https://www.evanliu2968.com.cn/public/images/horse.png'
+    logo='https://raw.githubusercontent.com/EvanLiu2968/clover/master/cdn/images/horse.png'
     error-correction-level='H'
     :mask-pattern='0'
     :logo-width='40'/>
