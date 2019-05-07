@@ -23,6 +23,26 @@ path 错误： 页面500，拿不到错误信息
 综上，需要用try catch
 */
 
+/**
+ *
+ *
+ * @param {*} url
+ * @param {*} params
+ * @returns
+ */
+export function serializeParam(url, params) {
+  if (!params) return url
+  const qstr = []
+  for (const k in params) {
+    const notEmpty = params[k] !== null && params[k] !== undefined
+    const value = notEmpty ? encodeURIComponent(params[k]) : ''
+    if (notEmpty) {
+      qstr.push(encodeURIComponent(k) + '=' + value)
+    }
+  }
+  return url + '?' + qstr.join('&')
+}
+
 function isIE9() {
   return navigator.userAgent.indexOf('MSIE 9.0') > 0
 }
@@ -32,7 +52,7 @@ function getFile(elInput) {
     return elInput.value
   } else {
     if (elInput && elInput.files) {
-      return elInput.files[0]
+      return elInput.files
     }
   }
 }
@@ -123,6 +143,7 @@ function getFrameResponse(frame, cb) {
 }
 
 export default {
+  serializeParam, // format url param
   getFile, // 获取文件
   getSrc, // 获取文件名
   getType, // 获取文件类型

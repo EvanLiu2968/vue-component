@@ -5,7 +5,7 @@
     </div>
     <form action="" class="webuploader-form">
       <label class="webuploader-label">
-        <input v-if="resetInput" :name="name" :accept="accept[type]" :multiple="multiple" type="file" class="webuploader-element-invisible" @change="fileChange">
+        <input v-if="resetInput" :name="name" :accept="currentAccept" :multiple="multiple" type="file" class="webuploader-element-invisible" @change="fileChange">
       </label>
     </form>
     <iframe v-if="control && postAction !== ''" :id="idIframe" :name="idIframe" style="display:none;">
@@ -79,31 +79,21 @@
 
 <script>
 /**
- * fork自talebase-ui/Upload, options events参考自WebUploader
+ * options events参考自WebUploader
  * Options: 如下props
  * Events:
  * uploadSuccess(res, files[list]) 注：请求成功后后端返回错误code都为uploadSuccess，因为那是业务上的处理逻辑
  * error(message) 注：底层请求错误及验证错误都放到error
  * uploadProgress(percent)
  */
-import util from './util'
+// import Cookies from 'js-cookie'
+import util from './libs/util'
 
 const headers = {}
+// headers['accessToken'] = Cookies.get('cas_token')
 headers['accessToken'] = 'none'
 
-function serializeParam(url, params) {
-  if (!params) return url
-  const qstr = []
-  for (const k in params) {
-    const value = (params[k] ? encodeURIComponent(params[k]) : '')
-    if (value) {
-      qstr.push(encodeURIComponent(k) + '=' + value)
-    }
-  }
-  return url + '?' + qstr.join('&')
-}
-
-var id = 0
+let id = 0
 export default {
   name: 'VUpload',
   props: {
@@ -172,21 +162,38 @@ export default {
       showLoading: false,
       control: true,
       resetInput: true,
-      accept: {
-        'img': 'image/*',
-        'excel': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel',
-        'pdf': '.pdf'
+      acceptTypes: {
+        'img': {
+          message: '必须上传jpg .jpeg .gif .png .bmp格式的图片',
+          suffix: 'jpg,jpeg,png,gif,image/png,image/jpeg',
+          accept: 'image/*'
+        },
+        'excel': {
+          message: '必须上传excel文件',
+          suffix: '',
+          accept: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel'
+        },
+        'pdf': {
+          message: '必须上传pdf文件',
+          suffix: 'pdf',
+          accept: '.pdf'
+        },
+        'rar': {
+          message: '必须上传rar文件',
+          suffix: 'rar,zip,7z',
+          accept: '.rar,.zip,7z'
+        }
       },
       idIframe: 'uploadIframe_' + id,
-      files: {
-        body: null, // 文件体
-        name: '' // 文件名
-      }
+      files: []
     }
   },
   computed: {
+    currentAccept() {
+      return this.type ? this.acceptTypes[this.type].accept : ''
+    },
     postAction() {
-      return serializeParam(this.action, this.params)
+      return util.serializeParam(this.action, this.params)
     },
     calcMtoByte() {
       return this.fileSingleSizeLimit * 1024 * 1024
@@ -222,25 +229,16 @@ export default {
       this.showLoading = false
     },
     validateType(obj) {
-      var type = util.getType(obj)
-      if (this.type === 'img') {
-        if (type !== 'jpg' && type !== 'png' && type !== 'gif' && type !== 'image/png' && type !== 'image/jpeg') {
-          this.reset()
-          this.error('必须上传jpg .jpeg .gif .png .bmp格式的图片')
-          return false
-        }
-      } else if (this.type === 'excel') {
-        if (type !== 'xlsx' && type !== 'xls') {
-          this.reset()
-          this.error('必须上传excel文件')
-          return false
-        }
-      } else if (this.type === 'pdf') {
-        if (type !== 'pdf') {
-          this.reset()
-          this.error('必须上传pdf文件')
-          return false
-        }
+      const type = util.getType(obj).toLowerCase()
+      if (!this.type) {
+        return true
+      }
+      const currentType = this.acceptTypes[this.type]
+      const validSuffix = currentType.suffix.split(',')
+      if (!validSuffix.find(r => r === type)) {
+        this.reset()
+        this.error(currentType.message)
+        return false
       }
       return true
     },
@@ -253,15 +251,14 @@ export default {
       return true
     },
     fileChange(e) {
+      const target = e.target
       console.log(e)
-      const obj = e.target
-      if (obj.value) {
-        const isPassType = this.validateType(obj)
-        const isPassFileSize = this.validateFileSize(obj)
+      if (target.value) {
+        const isPassType = this.validateType(target)
+        const isPassFileSize = this.validateFileSize(target)
         if (isPassType && isPassFileSize) {
-          this.files = {
-            body: util.getFile(obj),
-            name: util.getSrc(obj, this.type).src
+          if (target.files) {
+            this.files = target.files
           }
           this.$emit('fileQueued', this.files)
           if (this.auto) {
@@ -283,7 +280,10 @@ export default {
     },
     submitHtml5() {
       const form = new window.FormData()
-      form.append(this.name, this.files.body)
+      Array.prototype.forEach.call(this.files, file => {
+        console.log(file)
+        form.append(this.name, file)
+      })
       const xhr = new XMLHttpRequest()
       const uploaded = () => {
         let res = { code: 'error', message: '上传失败' }
@@ -353,10 +353,7 @@ export default {
       }, 500)
     },
     resetFile() {
-      this.files = {
-        body: null,
-        name: ''
-      }
+      this.files = []
     }
   }
 }
